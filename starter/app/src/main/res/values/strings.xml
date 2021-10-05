@@ -19,4 +19,7 @@
     <string name="not_hazardous_asteroid_image">Not hazardous asteroid image</string>
     <string name="this_is_nasa_s_picture_of_day_showing_nothing_yet">This is NASA\'s picture of day, showing nothing yet</string>
     <string name="nasa_picture_of_day_content_description_format">NASA\'s picture of day: %s</string>
+    <string name="asteroid_name_hint">Asteroid\'s Name</string>
+    <string name="approach_date_hint">2021-10-09</string>
+    <string name="asteroid_status_content_description">This image shows the asteroid status of whether it is normal or potentially hazardous</string>
 </resources>

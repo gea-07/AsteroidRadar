@@ -4,6 +4,10 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 
@@ -21,6 +25,44 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
 
         setHasOptionsMenu(true)
+
+        var data = listOf<Asteroid>(
+            Asteroid(
+                1,
+                "Aster 1",
+                "10-09-21",
+                3.5,
+                5.2,
+                500.0,
+                350.0,
+                true
+            ),
+            Asteroid(
+                2,
+                "Aster 2",
+                "10-06-21",
+                3.5,
+                5.2,
+                500.0,
+                350.0,
+                false
+            )
+        )
+        val asteroidAdapter = AsteroidAdapter()
+        asteroidAdapter.submitList(data)
+        val view = binding.asteroidRecycler
+        if (view is RecyclerView) {
+            with(view){
+                adapter = asteroidAdapter
+
+                addItemDecoration(
+                    DividerItemDecoration(
+                        context,
+                        LinearLayoutManager.VERTICAL
+                    )
+                )
+            }
+        }
 
         return binding.root
     }
