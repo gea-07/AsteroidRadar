@@ -25,29 +25,7 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
 
         setHasOptionsMenu(true)
-
-        var data = listOf<Asteroid>(
-            Asteroid(
-                1,
-                "Aster 1",
-                "10-09-21",
-                3.5,
-                5.2,
-                500.0,
-                350.0,
-                true
-            ),
-            Asteroid(
-                2,
-                "Aster 2",
-                "10-06-21",
-                3.5,
-                5.2,
-                500.0,
-                350.0,
-                false
-            )
-        )
+        var data = viewModel.asteroidList.value
         val asteroidAdapter = AsteroidAdapter()
         asteroidAdapter.submitList(data)
         val view = binding.asteroidRecycler
