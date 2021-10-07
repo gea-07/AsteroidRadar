@@ -1,14 +1,12 @@
 package com.udacity.asteroidradar.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
 import com.udacity.asteroidradar.api.AsteroidApi
 import com.udacity.asteroidradar.api.AsteroidProperty
 import com.udacity.asteroidradar.api.parseAsteroidsJsonResult
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
 import retrofit2.Call
@@ -24,16 +22,14 @@ class MainViewModel : ViewModel() {
 
     private var _asteroidList = MutableLiveData<MutableList<Asteroid>>()
 
-    val asteroidList: LiveData<MutableList<Asteroid>>
-        get() = _asteroidList
+    val asteroidList: LiveData<MutableList<Asteroid>> = _asteroidList
 
     init {
         getAsteroidList()
     }
 
     private fun getAsteroidList() {
-        var asteroidList: ArrayList<Asteroid> = ArrayList()
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val calendar = Calendar.getInstance()
                 val currentTime = calendar.time
@@ -43,18 +39,18 @@ class MainViewModel : ViewModel() {
                 val endTime = calendar.time
                 val endDate = dateFormat.format(endTime)
 
-                var result: String = AsteroidApi.retrofitService.getAsteroids(
+                var result = AsteroidApi.retrofitService.getAsteroids(
                     startDate,
                     endDate,
                     APIKEY)
                 if (result !== null) {
-                    asteroidList = parseAsteroidsJsonResult(JSONObject(result))
+                    _asteroidList.value = parseAsteroidsJsonResult(JSONObject(result))
                 }
             } catch (e: Exception) {
                 val response = "Failure: " + e.message
             }
         }
-        _asteroidList.value = asteroidList
+
 //        _asteroidList.value = mutableListOf(
 //            Asteroid(
 //                1,
