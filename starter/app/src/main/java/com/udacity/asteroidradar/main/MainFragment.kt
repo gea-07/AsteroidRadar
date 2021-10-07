@@ -25,13 +25,11 @@ class MainFragment : Fragment() {
         binding.viewModel = viewModel
 
         setHasOptionsMenu(true)
-        var data = viewModel.asteroidList.value
-        val asteroidAdapter = AsteroidAdapter()
-        asteroidAdapter.submitList(data)
+
         val view = binding.asteroidRecycler
         if (view is RecyclerView) {
             with(view){
-                adapter = asteroidAdapter
+                adapter = AsteroidAdapter()
 
                 addItemDecoration(
                     DividerItemDecoration(

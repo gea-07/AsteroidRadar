@@ -1,5 +1,6 @@
 package com.udacity.asteroidradar.main
 
+import android.util.Log
 import androidx.lifecycle.*
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
@@ -19,6 +20,7 @@ import kotlin.collections.ArrayList
 
 const val APIKEY = "8z7wdyAJ06CuPQCDcgqkco5zX9SNJqQEbLetKsgj"
 class MainViewModel : ViewModel() {
+    private val TAG = "MainViewModel"
 
     private var _asteroidList = MutableLiveData<MutableList<Asteroid>>()
 
@@ -29,7 +31,7 @@ class MainViewModel : ViewModel() {
     }
 
     private fun getAsteroidList() {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch() {
             try {
                 val calendar = Calendar.getInstance()
                 val currentTime = calendar.time
@@ -47,7 +49,7 @@ class MainViewModel : ViewModel() {
                     _asteroidList.value = parseAsteroidsJsonResult(JSONObject(result))
                 }
             } catch (e: Exception) {
-                val response = "Failure: " + e.message
+                Log.e(TAG, "Failure: " + e.message)
             }
         }
 
