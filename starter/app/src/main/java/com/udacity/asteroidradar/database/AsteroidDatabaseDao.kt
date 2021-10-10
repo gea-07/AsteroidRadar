@@ -22,6 +22,9 @@ suspend fun clear()
 @Query("SELECT * FROM asteroid_table ORDER by close_approach_date DESC")
 fun getAllAsteroids() : LiveData<List<Asteroid>>
 
+@Query("SELECT * FROM asteroid_table WHERE close_approach_date BETWEEN date(:startDate) AND date(:endDate) ORDER BY date(close_approach_date) ASC")
+fun getAsteroidsByDateRange(startDate: String, endDate:String) : LiveData<List<Asteroid>>
+
 @Query("SELECT * FROM asteroid_table ORDER BY close_approach_date DESC LIMIT 1")
 suspend fun getAsteroid(): Asteroid?
 }
