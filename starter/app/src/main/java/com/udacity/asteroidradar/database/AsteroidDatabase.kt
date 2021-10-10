@@ -8,7 +8,7 @@ import com.udacity.asteroidradar.Asteroid
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.internal.synchronized
 
-@Database(entities = [Asteroid::class], version = 3, exportSchema = false)
+@Database(entities = [Asteroid::class], version = 4, exportSchema = false)
 abstract class AsteroidDatabase: RoomDatabase() {
     abstract val asteroidDatabaseDao: AsteroidDatabaseDao
 

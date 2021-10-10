@@ -10,9 +10,7 @@ import kotlinx.android.parcel.Parcelize
 @Parcelize
 @Entity(tableName="asteroid_table")
 data class Asteroid(
-    @PrimaryKey(autoGenerate = true) @ColumnInfo(name="unique_id")
-    val uniqueId: Long,
-
+    @PrimaryKey
     @ColumnInfo(name="id")
     val id: Long,
 
