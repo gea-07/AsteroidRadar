@@ -11,16 +11,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.R
+import com.udacity.asteroidradar.database.AsteroidDatabase
+import com.udacity.asteroidradar.database.AsteroidDatabaseDao
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
+import kotlinx.coroutines.InternalCoroutinesApi
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
+    lateinit private var viewModel: MainViewModel
 
+    @InternalCoroutinesApi
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
+        val application = requireNotNull(this.activity).application
+
+        // Create an instance of the ViewModel Factory. Pass in DAO and context
+        val dataSource: AsteroidDatabaseDao? =
+            AsteroidDatabase.getInstance(application)?.asteroidDatabaseDao ?: null
+        val viewModelFactory = MainViewModelFactory(dataSource!!, application)
+
+        // Get a reference to the ViewModel associated with this fragment.
+        viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)
         val binding = FragmentMainBinding.inflate(inflater)
         binding.lifecycleOwner = this
 
