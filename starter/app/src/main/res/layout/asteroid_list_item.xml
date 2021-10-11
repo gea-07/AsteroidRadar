@@ -8,6 +8,13 @@
             type="com.udacity.asteroidradar.Asteroid" />
     </data>
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:padding="4dp"
+        app:cardBackgroundColor="@color/cardview_dark_background"
+        app:cardCornerRadius="1dp">
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -30,6 +37,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
             tools:text="@string/approach_date_hint"
             android:text="@{asteroid.closeApproachDate}"
             android:textColor="@color/colorAccent"
@@ -50,4 +58,5 @@
             app:srcCompat="@drawable/ic_status_normal"
             app:asteroidStatusSrc="@{asteroid.isPotentiallyHazardous}"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
 </layout>
