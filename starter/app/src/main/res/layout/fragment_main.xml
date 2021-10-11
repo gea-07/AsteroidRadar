@@ -28,7 +28,9 @@
                 android:layout_height="match_parent"
                 android:adjustViewBounds="true"
                 android:scaleType="centerCrop"
-                app:srcCompat="@drawable/placeholder_picture_of_day"/>
+                app:pictureOfTheDay='@{viewModel.pictureOfTheDay.mediaType=="image" ? viewModel.pictureOfTheDay.url:""}'
+                app:srcCompat="@drawable/placeholder_picture_of_day"
+                android:contentDescription="@{viewModel.pictureOfTheDay.title}"/>
 
             <TextView
                 android:id="@+id/textView"
@@ -40,7 +42,7 @@
                 android:textSize="20sp"
                 android:layout_gravity="bottom"
                 android:background="#55010613"
-                android:text="@string/image_of_the_day" />
+                android:text="@{viewModel.pictureOfTheDay.title}" />
         </FrameLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -55,7 +57,8 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/activity_main_image_of_the_day_layout"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintVertical_bias="0.0"
+            android:contentDescription="@string/this_area_shows_a_list_of_asteroids_that_you_can_click_on"/>
 
         <ProgressBar
             android:id="@+id/status_loading_wheel"
@@ -67,6 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/progress_bar_shows_while_fetching_data_from_the_network"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

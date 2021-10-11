@@ -22,4 +22,14 @@
     <string name="asteroid_name_hint">Asteroid\'s Name</string>
     <string name="approach_date_hint">2021-10-09</string>
     <string name="asteroid_status_content_description">This image shows the asteroid status of whether it is normal or potentially hazardous</string>
+    <string name="image_of_the_day_content_desc">This shows the space image of the day</string>
+    <string name="this_area_shows_a_list_of_asteroids_that_you_can_click_on">This area shows a list of asteroids that you can click on</string>
+    <string name="progress_bar_shows_while_fetching_data_from_the_network">Progress bar shows while fetching data from the network</string>
+    <string name="shows_a_picture_of_an_asteroid_that_may_or_may_not_be_potentially_hazardous">Shows a picture of an asteroid that may or may not be potentially hazardous</string>
+    <string name="the_close_approach_date_label">The close approach date label</string>
+    <string name="the_absolute_magnitude_label">The absolute magnitude label</string>
+    <string name="the_help_button">The help button</string>
+    <string name="the_estimated_diameter_label">The estimated diameter label</string>
+    <string name="relative_velocity_label">Relative velocity label</string>
+    <string name="distance_from_earth_label">Distance from earth label</string>
 </resources>

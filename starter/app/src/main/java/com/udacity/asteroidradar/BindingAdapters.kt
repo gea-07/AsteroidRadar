@@ -6,6 +6,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import com.udacity.asteroidradar.main.AsteroidAdapter
 
 @BindingAdapter("statusIcon")
@@ -23,6 +24,13 @@ fun bindDetailsStatusImage(imageView: ImageView, isHazardous: Boolean) {
         imageView.setImageResource(R.drawable.asteroid_hazardous)
     } else {
         imageView.setImageResource(R.drawable.asteroid_safe)
+    }
+}
+
+@BindingAdapter("pictureOfTheDay")
+fun bindPictureOfTheDay(imageView: ImageView, url: String?) {
+    if (!url.isNullOrEmpty()) {
+        Picasso.with(imageView.context).load(url).into(imageView)
     }
 }
 
