@@ -9,10 +9,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.database.AsteroidDatabase
-import com.udacity.asteroidradar.database.AsteroidDatabaseDao
 import com.udacity.asteroidradar.databinding.FragmentMainBinding
 import kotlinx.coroutines.InternalCoroutinesApi
 
@@ -25,10 +23,9 @@ class MainFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val application = requireNotNull(this.activity).application
 
-        // Create an instance of the ViewModel Factory. Pass in DAO and context
-        val dataSource: AsteroidDatabaseDao? =
-            AsteroidDatabase.getInstance(application)?.asteroidDatabaseDao ?: null
-        val viewModelFactory = MainViewModelFactory(dataSource!!, application)
+        // Create an instance of the ViewModel Factory. Pass in database and context
+        val database: AsteroidDatabase? = AsteroidDatabase.getInstance(application)
+        val viewModelFactory = MainViewModelFactory(database!!, application)
 
         // Get a reference to the ViewModel associated with this fragment.
         viewModel = ViewModelProvider(this, viewModelFactory).get(MainViewModel::class.java)

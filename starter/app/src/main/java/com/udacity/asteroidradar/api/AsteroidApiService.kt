@@ -5,12 +5,15 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import com.udacity.asteroidradar.Asteroid
 import com.udacity.asteroidradar.Constants
+import kotlinx.coroutines.Deferred
 import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.text.SimpleDateFormat
+import java.util.*
 
 private val moshi = Moshi.Builder()
     .add(KotlinJsonAdapterFactory())
@@ -36,4 +39,21 @@ object AsteroidApi {
     val retrofitService: AsteroidApiService by lazy {
         retrofit.create(AsteroidApiService::class.java)
     }
+}
+
+fun getCurrentDate(): String {
+    val calendar = Calendar.getInstance()
+    val currentTime = calendar.time
+    val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
+    val currentDate = dateFormat.format(currentTime)
+    return currentDate
+}
+
+fun getCurrentDatePlusSevenDays(): String {
+    val calendar = Calendar.getInstance()
+    calendar.add(Calendar.DAY_OF_YEAR, Constants.DEFAULT_END_DATE_DAYS)
+    val endTime = calendar.time
+    val dateFormat = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT, Locale.getDefault())
+    val endDate = dateFormat.format(endTime)
+    return endDate
 }
