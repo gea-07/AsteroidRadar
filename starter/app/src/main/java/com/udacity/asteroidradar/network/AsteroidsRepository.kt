@@ -39,7 +39,7 @@ class AsteroidsRepository(private val database: AsteroidDatabase) {
                 val asteroidList: String = AsteroidApi.retrofitService
                     .getAsteroids(getCurrentDate(),
                         getCurrentDatePlusSevenDays(),
-                        HiddenConstants.APIKEY)
+                        BuildConfig.nasa_api_key)
                 status.postValue(AsteroidApiStatus.DONE)
 
                 // Parsed JSON result into a list of asteroids
