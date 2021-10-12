@@ -45,6 +45,9 @@ class AsteroidsRepository(private val database: AsteroidDatabase) {
                 // Parsed JSON result into a list of asteroids
                 val parsedAsteroidList = parseAsteroidsJsonResult(JSONObject(asteroidList))
                 try {
+                    // Delete previous days asteroid data to avoid adding to much in the database
+                    database.asteroidDatabaseDao.deletePreviousDays(getCurrentDate())
+                    // Now insert new data to the database
                     database.asteroidDatabaseDao.insertAll(*parsedAsteroidList.asDatabaseModel())
                 }catch (e1: Exception) {
                     Log.e(TAG, "Failure to insert to the database: " + e1.message)

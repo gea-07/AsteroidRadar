@@ -8,6 +8,7 @@ import com.udacity.asteroidradar.R
 import com.udacity.asteroidradar.api.AsteroidApi
 import com.udacity.asteroidradar.database.AsteroidDatabase
 import kotlinx.coroutines.launch
+import timber.log.Timber
 import java.lang.Exception
 
 
@@ -45,9 +46,9 @@ class MainViewModel(private val database: AsteroidDatabase, application:Applicat
 
                 _pictureOfTheDay.value = AsteroidApi.retrofitService.getImageofTheDay(
                     BuildConfig.nasa_api_key)
-                Log.i(TAG, "FOUND PICTURE OF DAY")
+                Timber.tag(TAG).e("FOUND PICTURE OF DAY")
             } catch (e1: Exception) {
-                Log.e(TAG, "Failure to fetch image of the day: " + e1.message)
+                Timber.tag(TAG).e("Failure to fetch image of the day: " + e1.message)
             }
         }
     }
